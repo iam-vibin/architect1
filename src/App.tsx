@@ -1,46 +1,81 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import LoginPage from "./pages/LoginPage";
+import RoleSelectPage from "./pages/RoleSelectPage";
+import RegisterPage from "./pages/RegisterPage";
 import UserDashboard from "./pages/UserDashboard";
 import ProfessionalDashboard from "./pages/ProfessionalDashboard";
+import ProfessionalProfilePage from "./pages/ProfessionalProfilePage";
 import ChatPage from "./pages/ChatPage";
+import ProfessionalChatsPage from "./pages/ProfessionalChatsPage";
+import ProfessionalChatPage from "./pages/ProfessionalChatPage";
+import AdminDashboard from "./pages/AdminDashboard";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./contexts/AuthContext";
-
-function AdminDashboard() {
-  return <h1>Admin Dashboard</h1>;
-}
 
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<Navigate to="/select-role" replace />} />
+          <Route path="/select-role" element={<RoleSelectPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
 
           <Route
-            path="/user"
+            path="/user-dashboard"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["user"]}>
                 <UserDashboard />
               </ProtectedRoute>
             }
           />
 
           <Route
-            path="/professional"
+            path="/professional-dashboard"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["professional"]}>
                 <ProfessionalDashboard />
               </ProtectedRoute>
             }
           />
 
           <Route
-            path="/admin"
+            path="/professional/chats"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute allowedRoles={["professional"]}>
+                <ProfessionalChatsPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/professional/chat/:id"
+            element={
+              <ProtectedRoute allowedRoles={["professional"]}>
+                <ProfessionalChatPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/professional/profile"
+            element={
+              <ProtectedRoute allowedRoles={["professional"]}>
+                <React.Suspense fallback={null}>
+                  <ProfessionalProfilePage />
+                </React.Suspense>
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin-dashboard"
+            element={
+              <ProtectedRoute allowedRoles={["admin"]}>
                 <AdminDashboard />
               </ProtectedRoute>
             }
@@ -51,6 +86,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <ChatPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/chats"
+            element={
+              <ProtectedRoute>
+                <ProfessionalChatsPage />
               </ProtectedRoute>
             }
           />

@@ -1,114 +1,66 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { professionals } from "@/data/mockData";
+import { ProfessionalCard } from "@/components/professionals/ProfessionalCard";
 
 export default function UserDashboard() {
   const navigate = useNavigate();
   const { logout } = useAuth();
 
-  // Mock professionals data (PoC)
-  const professionals = [
-    { id: 1, name: "Arun Kumar", role: "Architect" },
-    { id: 2, name: "Priya Sharma", role: "Interior Designer" },
-    { id: 3, name: "Ramesh Builders", role: "Builder" },
-    { id: 4, name: "Sneha Designs", role: "Interior Designer" },
-  ];
-
   return (
-    <div style={{ padding: 30 }}>
-      {/* Header */}
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <div className="p-4">
+      <div className="flex items-start justify-between mb-3">
         <div>
-          <h2>Welcome back,</h2>
-          <h1>User</h1>
+          <h2 className="text-sm text-muted-foreground">Welcome back,</h2>
+          <h1 className="text-2xl font-semibold">User</h1>
         </div>
 
-        {/* Logout */}
         <button
           onClick={logout}
-          style={{
-            height: 40,
-            padding: "0 16px",
-            background: "#e53935",
-            color: "white",
-            border: "none",
-            cursor: "pointer",
-          }}
+          className="h-10 px-4 bg-red-600 text-white rounded-md"
         >
           Logout
         </button>
       </div>
 
-      {/* Search */}
-      <input
-        placeholder="Search professionals, locations..."
-        style={{
-          marginTop: 20,
-          padding: 10,
-          width: "100%",
-          maxWidth: 400,
-        }}
-      />
-
-      {/* Filters */}
-      <div style={{ marginTop: 20, display: "flex", gap: 20 }}>
-        <span>All</span>
-        <span>Architect</span>
-        <span>Interior Designer</span>
-        <span>Builder</span>
+      <div className="mb-3">
+        <input
+          placeholder="Search professionals, locations..."
+          className="w-full max-w-md px-3 py-2 rounded-md border"
+        />
       </div>
 
-      <hr style={{ margin: "30px 0" }} />
+      <div className="flex gap-4 text-sm mb-4">
+        <button className="px-2 py-1 rounded-md bg-slate-100">All</button>
+        <button className="px-2 py-1 rounded-md">Architect</button>
+        <button className="px-2 py-1 rounded-md">Interior Designer</button>
+        <button className="px-2 py-1 rounded-md">Builder</button>
+      </div>
 
-      {/* Stats */}
-      <div style={{ display: "flex", gap: 100 }}>
+      <div className="mb-4 flex gap-10">
         <div>
-          <h1>3</h1>
-          <p>Verified Professionals</p>
+          <h3 className="text-2xl font-semibold">3</h3>
+          <p className="text-sm text-muted-foreground">Verified Professionals</p>
         </div>
-
         <div>
-          <h1>4</h1>
-          <p>Available Experts</p>
+          <h3 className="text-2xl font-semibold">4</h3>
+          <p className="text-sm text-muted-foreground">Available Experts</p>
         </div>
       </div>
 
-      <hr style={{ margin: "30px 0" }} />
+      <hr className="my-4" />
 
-      {/* Professionals List */}
-      <h2>All Professionals</h2>
-      <p>{professionals.length} found</p>
+      <div className="mb-2 flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-semibold">All Professionals</h2>
+          <p className="text-sm text-muted-foreground">{professionals.length} found</p>
+        </div>
+      </div>
 
-      <div style={{ marginTop: 20 }}>
+      <div className="overflow-x-auto -mx-4 px-4 pb-4 flex snap-x snap-mandatory">
         {professionals.map((pro) => (
-          <div
-            key={pro.id}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              marginBottom: 15,
-              padding: 10,
-              border: "1px solid #ddd",
-              maxWidth: 500,
-            }}
-          >
-            <div>
-              <strong>{pro.name}</strong>
-              <div>{pro.role}</div>
-            </div>
-
-            <button
-              style={{
-                backgroundColor: "green",
-                color: "white",
-                padding: "6px 12px",
-                border: "none",
-                cursor: "pointer",
-              }}
-              onClick={() => navigate(`/chat/${pro.id}`)}
-            >
-              Message
-            </button>
+          <div key={pro.id} className="snap-start">
+            <ProfessionalCard professional={pro} />
           </div>
         ))}
       </div>

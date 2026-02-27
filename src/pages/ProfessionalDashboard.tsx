@@ -24,7 +24,7 @@ export default function ProfessionalDashboard() {
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    navigate("/login");
   };
 
   const stats = [
@@ -55,6 +55,7 @@ export default function ProfessionalDashboard() {
             <Button variant="ghost" size="icon">
               <Bell className="w-5 h-5" />
             </Button>
+            <Button variant="ghost" size="sm" onClick={() => navigate('/professional/profile')}>Profile</Button>
             <Button variant="ghost" size="icon" onClick={handleLogout}>
               <LogOut className="w-5 h-5" />
             </Button>

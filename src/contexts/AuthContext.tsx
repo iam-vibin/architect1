@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 /* ---------- Types ---------- */
 
@@ -6,15 +6,16 @@ export type Role = "user" | "professional" | "admin";
 
 export type UserSession = {
   id: string; // UUID
+  username: string;
+  name?: string;
   role: Role;
 };
 
 type AuthContextType = {
   user: UserSession | null;
-  loginAsUser: () => void;
-  loginAsProfessional: () => void;
-  loginAsAdmin: () => void;
+  login: (userData: UserSession) => void;
   logout: () => void;
+  role: Role | null;
 };
 
 /* ---------- Fake UUIDs (PoC-safe) ---------- */
@@ -32,24 +33,42 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserSession | null>(null);
 
-  const loginAsUser = () =>
-    setUser({ id: USER_ID, role: "user" });
+  // load from localStorage on mount
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('archifind_user');
+      if (raw) {
+        const parsed = JSON.parse(raw) as UserSession;
+        setUser(parsed);
+      }
+    } catch (err) {
+      // ignore
+    }
+  }, []);
 
-  const loginAsProfessional = () =>
-    setUser({ id: PROFESSIONAL_ID, role: "professional" });
+  const login = (userData: UserSession) => {
+    setUser(userData);
+    try {
+      localStorage.setItem('archifind_user', JSON.stringify(userData));
+    } catch (err) {
+      // ignore
+    }
+  };
 
-  const loginAsAdmin = () =>
-    setUser({ id: ADMIN_ID, role: "admin" });
-
-  const logout = () => setUser(null);
+  const logout = () => {
+    setUser(null);
+    try {
+      localStorage.removeItem('archifind_user');
+      localStorage.removeItem('archifind_selected_role');
+    } catch (err) {}
+  };
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        loginAsUser,
-        loginAsProfessional,
-        loginAsAdmin,
+        role: user ? user.role : null,
+        login,
         logout,
       }}
     >

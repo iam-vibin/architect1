@@ -16,7 +16,7 @@ export default function AdminDashboard() {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate('/login');
   };
 
   const handleVerification = (id: string, action: 'approved' | 'rejected') => {
@@ -188,14 +188,15 @@ export default function AdminDashboard() {
           <h2 className="text-lg font-semibold text-foreground mb-4">Quick Actions</h2>
           <div className="bg-card rounded-xl shadow-card overflow-hidden">
             {[
-              { label: 'Manage Professionals', icon: Building2 },
-              { label: 'User Reports', icon: AlertCircle },
-              { label: 'View All Chats', icon: MessageCircle },
+              { label: 'Manage Professionals', icon: Building2, to: '/admin' },
+              { label: 'User Reports', icon: AlertCircle, to: '/admin' },
+              { label: 'View All Chats', icon: MessageCircle, to: '/admin/chats' },
             ].map((item, index) => {
               const Icon = item.icon;
               return (
                 <button
                   key={item.label}
+                  onClick={() => navigate(item.to)}
                   className="w-full flex items-center gap-4 p-4 hover:bg-muted/50 transition-colors border-b border-border last:border-0"
                 >
                   <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">

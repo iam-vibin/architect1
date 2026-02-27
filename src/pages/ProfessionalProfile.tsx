@@ -7,6 +7,8 @@ import {
 import { professionals } from '@/data/mockData';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import ReviewForm from '@/components/ReviewForm';
+import ReviewsList from '@/components/ReviewsList';
 
 export default function ProfessionalProfile() {
   const { id } = useParams();
@@ -171,6 +173,8 @@ export default function ProfessionalProfile() {
                 </div>
               </div>
             </div>
+            <ReviewsList professional={professional.id} />
+            <ReviewForm professional={professional.id} />
           </div>
         ) : (
           <div className="portfolio-grid">

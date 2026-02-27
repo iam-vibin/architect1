@@ -22,7 +22,7 @@ export default function ProfilePage() {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate('/login');
   };
 
   return (
