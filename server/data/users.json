@@ -16,5 +16,11 @@
     "username": "admin",
     "password": "admin123",
     "role": "admin"
+  },
+  {
+    "id": "3e00c4ec-8be3-431c-a13c-164d7b6a0cce",
+    "username": "vishnu ",
+    "password": "$2a$10$H3/8YBHxh1jGPybKBTnil.hvDXAQPHzC1ztOXPebkJpou2Ai45MYu",
+    "role": "user"
   }
 ]
