@@ -52,6 +52,7 @@ app.get('/', (req, res) => {
     res.status(500).json({ error: 'internal server error' })
   }
 })
+
 app.post('/register', (req, res) => {
   try {
     const { fullName, username, password, role } = req.body || {}
@@ -265,3 +266,4 @@ const PORT = 5000
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)
 })
+ 
