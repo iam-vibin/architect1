@@ -1,0 +1,44 @@
+[
+  {
+    "id": "cat-1",
+    "name": "Architect",
+    "description": "Residential, commercial, and landscape architects",
+    "count": 2
+  },
+  {
+    "id": "cat-2",
+    "name": "Interior Designer",
+    "description": "Modular kitchen, living, and false ceiling experts",
+    "count": 2
+  },
+  {
+    "id": "cat-3",
+    "name": "Builder",
+    "description": "Civil contractors and turnkey house construction",
+    "count": 1
+  },
+  {
+    "id": "cat-4",
+    "name": "Landscape Architect",
+    "description": "Terrace gardens, swimming pools and lawns",
+    "count": 0
+  },
+  {
+    "id": "cat-5",
+    "name": "Structural Engineer",
+    "description": "Building structural safety and plan approvals",
+    "count": 0
+  },
+  {
+    "id": "cat-1793714249465",
+    "name": "Acoustic Engineer",
+    "description": "Studio sound isolation",
+    "count": 0
+  },
+  {
+    "id": "cat-1793714431253",
+    "name": "Acoustic Engineer",
+    "description": "Studio sound isolation",
+    "count": 0
+  }
+]

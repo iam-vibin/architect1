@@ -1,0 +1,52 @@
+[
+  {
+    "id": "pay-1793714431078",
+    "quoteId": "quote-1793714430990",
+    "quoteNumber": "AF-QT-2784",
+    "userId": "d802853a-57bf-4786-9dc8-2a38fb0cc981",
+    "userName": "E2E Test Client",
+    "professionalId": "prof-1",
+    "professionalName": "Arun Kumar",
+    "amount": 180000,
+    "platformFee": 3600,
+    "status": "released_to_professional",
+    "paymentMethod": "test_card",
+    "cardLast4": "4242",
+    "transactionRef": "ESCROW-TX-HIHGKB5",
+    "createdAt": "2026-11-03T14:00:31.078Z",
+    "releasedAt": "2026-11-03T14:00:31.098Z"
+  },
+  {
+    "id": "pay-1793714249317",
+    "quoteId": "quote-1793714249235",
+    "quoteNumber": "AF-QT-9872",
+    "userId": "2ebd08da-dd21-4829-899e-a2d978e3aea8",
+    "userName": "E2E Test Client",
+    "professionalId": "prof-1",
+    "professionalName": "Arun Kumar",
+    "amount": 180000,
+    "platformFee": 3600,
+    "status": "released_to_professional",
+    "paymentMethod": "test_card",
+    "cardLast4": "4242",
+    "transactionRef": "ESCROW-TX-WCCVJ0K",
+    "createdAt": "2026-11-03T13:57:29.318Z",
+    "releasedAt": "2026-11-03T13:57:29.337Z"
+  },
+  {
+    "id": "pay-101",
+    "quoteId": "quote-2",
+    "quoteNumber": "AF-QT-1002",
+    "userId": "b481e30e-b6cb-40e6-9b72-7886a11de2a4",
+    "userName": "Priya Sharma",
+    "professionalId": "prof-2",
+    "professionalName": "Priya Interior Studio",
+    "amount": 320000,
+    "platformFee": 6400,
+    "status": "held_in_escrow",
+    "paymentMethod": "test_card",
+    "cardLast4": "4242",
+    "transactionRef": "ESCROW-TX-ZNEVJN6",
+    "createdAt": "2026-10-30T13:45:28.760Z"
+  }
+]

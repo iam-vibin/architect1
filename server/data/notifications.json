@@ -1,0 +1,152 @@
+[
+  {
+    "id": "notif-1",
+    "userId": "b481e30e-b6cb-40e6-9b72-7886a11de2a4",
+    "title": "Quotation Received",
+    "message": "Arun Kumar has submitted an estimate for your Villa project.",
+    "type": "quote",
+    "link": "/user-dashboard",
+    "isRead": false,
+    "createdAt": "2026-11-02T13:45:28.758Z"
+  },
+  {
+    "id": "notif-2",
+    "userId": "fa4c1c9c-6527-444c-bea7-db35ffc8b710",
+    "title": "New Quote Request",
+    "message": "You have received a new quotation request from Priya Sharma.",
+    "type": "quote",
+    "link": "/professional-dashboard",
+    "isRead": false,
+    "createdAt": "2026-11-01T13:45:28.758Z"
+  },
+  {
+    "id": "notif-3",
+    "userId": "b481e30e-b6cb-40e6-9b72-7886a11de2a4",
+    "title": "Escrow Deposit Confirmed",
+    "message": "₹3,20,000 is safely held in escrow for Priya Interior Studio.",
+    "type": "payment",
+    "link": "/user-dashboard",
+    "isRead": true,
+    "createdAt": "2026-10-30T13:45:28.758Z"
+  },
+  {
+    "id": "notif-1793714249237",
+    "userId": "fa4c1c9c-6527-444c-bea7-db35ffc8b710",
+    "title": "New Quotation Request",
+    "message": "Client requested a quotation for Independent Villa 3D Elevation",
+    "type": "quote",
+    "link": "/professional-dashboard",
+    "isRead": false,
+    "createdAt": "2026-11-03T13:57:29.237Z"
+  },
+  {
+    "id": "notif-1793714249254",
+    "userId": "guest-user",
+    "title": "Quotation Ready!",
+    "message": "Arun Kumar has sent an estimate of ₹1,80,000 for your project.",
+    "type": "quote",
+    "link": "/user-dashboard",
+    "isRead": false,
+    "createdAt": "2026-11-03T13:57:29.299Z"
+  },
+  {
+    "id": "notif-1793714249320",
+    "userId": "prof-1",
+    "title": "Escrow Payment Funded!",
+    "message": "₹1,80,000 has been safely deposited in escrow for Project AF-QT-9872. You can now start work!",
+    "type": "payment",
+    "link": "/professional-dashboard",
+    "isRead": false,
+    "createdAt": "2026-11-03T13:57:29.320Z"
+  },
+  {
+    "id": "notif-1793714249339",
+    "userId": "prof-1",
+    "title": "Funds Released!",
+    "message": "Client has approved project completion. ₹1,80,000 has been released to your account.",
+    "type": "payment",
+    "link": "/professional-dashboard",
+    "isRead": false,
+    "createdAt": "2026-11-03T13:57:29.339Z"
+  },
+  {
+    "id": "notif-1793714249391",
+    "userId": "prof-1",
+    "title": "New Message",
+    "message": "E2E Test Client: Hello Arun, following up on our project milestones....",
+    "type": "message",
+    "link": "/chat/2ebd08da-dd21-4829-899e-a2d978e3aea8",
+    "isRead": false,
+    "createdAt": "2026-11-03T13:57:29.391Z"
+  },
+  {
+    "id": "notif-1793714249448",
+    "userId": "uuid-pro-meera",
+    "title": "Verification Approved!",
+    "message": "Congratulations! Your professional credentials have been verified by ArchiFind administration.",
+    "type": "verification",
+    "link": "/professional-dashboard",
+    "isRead": false,
+    "createdAt": "2026-11-03T13:57:29.448Z"
+  },
+  {
+    "id": "notif-1793714430992",
+    "userId": "fa4c1c9c-6527-444c-bea7-db35ffc8b710",
+    "title": "New Quotation Request",
+    "message": "Client requested a quotation for Independent Villa 3D Elevation",
+    "type": "quote",
+    "link": "/professional-dashboard",
+    "isRead": false,
+    "createdAt": "2026-11-03T14:00:30.992Z"
+  },
+  {
+    "id": "notif-1793714431013",
+    "userId": "guest-user",
+    "title": "Quotation Ready!",
+    "message": "Arun Kumar has sent an estimate of ₹1,80,000 for your project.",
+    "type": "quote",
+    "link": "/user-dashboard",
+    "isRead": false,
+    "createdAt": "2026-11-03T14:00:31.059Z"
+  },
+  {
+    "id": "notif-1793714431081",
+    "userId": "prof-1",
+    "title": "Escrow Payment Funded!",
+    "message": "₹1,80,000 has been safely deposited in escrow for Project AF-QT-2784. You can now start work!",
+    "type": "payment",
+    "link": "/professional-dashboard",
+    "isRead": false,
+    "createdAt": "2026-11-03T14:00:31.081Z"
+  },
+  {
+    "id": "notif-1793714431100",
+    "userId": "prof-1",
+    "title": "Funds Released!",
+    "message": "Client has approved project completion. ₹1,80,000 has been released to your account.",
+    "type": "payment",
+    "link": "/professional-dashboard",
+    "isRead": false,
+    "createdAt": "2026-11-03T14:00:31.100Z"
+  },
+  {
+    "id": "notif-1793714431185",
+    "userId": "prof-1",
+    "title": "New Message",
+    "message": "E2E Test Client: Hello Arun, following up on our project milestones....",
+    "type": "message",
+    "link": "/chat/d802853a-57bf-4786-9dc8-2a38fb0cc981",
+    "isRead": false,
+    "createdAt": "2026-11-03T14:00:31.185Z"
+  },
+  {
+    "id": "notif-1793714431236",
+    "userId": "uuid-pro-meera",
+    "title": "Verification Approved!",
+    "message": "Congratulations! Your professional credentials have been verified by ArchiFind administration.",
+    "type": "verification",
+    "link": "/professional-dashboard",
+    "isRead": false,
+    "createdAt": "2026-11-03T14:00:31.236Z"
+  }
+]

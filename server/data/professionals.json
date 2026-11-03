@@ -1,1 +1,224 @@
-[]
+[
+  {
+    "id": "prof-1",
+    "userId": "fa4c1c9c-6527-444c-bea7-db35ffc8b710",
+    "name": "Arun Kumar",
+    "username": "pro1",
+    "profession": "Architect",
+    "category": "Architect",
+    "experience": 8,
+    "location": "Chennai",
+    "specialization": "Residential & Commercial Architecture",
+    "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400",
+    "isVerified": true,
+    "verificationStatus": "approved",
+    "verificationDocs": [
+      "Council of Architecture License #CA/2018/4561",
+      "Degree Certificate - Anna University"
+    ],
+    "rating": 5,
+    "reviewsCount": 3,
+    "projectsCompleted": 45,
+    "budgetRange": "₹50,000 - ₹5,00,000",
+    "hourlyRate": "₹2,500/hr",
+    "phone": "+91 94440 12345",
+    "email": "arun.architect@archifind.local",
+    "isAvailable": true,
+    "about": "Award-winning registered architect with expertise in eco-friendly sustainable design, passive cooling, and modern luxury architecture.",
+    "portfolio": [
+      {
+        "id": "p1-1",
+        "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800",
+        "title": "Modern Minimalist Villa",
+        "description": "4-bedroom luxury villa with double-height ceiling and courtyard garden in ECR Chennai.",
+        "category": "Residential",
+        "cost": "₹85,00,000"
+      },
+      {
+        "id": "p1-2",
+        "image": "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800",
+        "title": "Boutique Corporate Office",
+        "description": "Sustainable glass-facade corporate workspace with solar integration in OMR Chennai.",
+        "category": "Commercial",
+        "cost": "₹1,20,00,000"
+      },
+      {
+        "id": "p1-3",
+        "image": "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=800",
+        "title": "Contemporary Penthouse Design",
+        "description": "Open-plan penthouse elevation with panoramic deck and rainwater harvesting.",
+        "category": "Residential",
+        "cost": "₹65,00,000"
+      }
+    ],
+    "createdAt": "2026-11-03T13:45:28.750Z"
+  },
+  {
+    "id": "prof-2",
+    "userId": "uuid-pro-priya",
+    "name": "Priya Interior Studio",
+    "username": "priyadesigns",
+    "profession": "Interior Designer",
+    "category": "Interior Designer",
+    "experience": 6,
+    "location": "Coimbatore",
+    "specialization": "Modular Kitchens & Luxury Living Spaces",
+    "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400",
+    "isVerified": true,
+    "verificationStatus": "approved",
+    "verificationDocs": [
+      "IIID Registered Designer #ID-9821",
+      "GST Certificate"
+    ],
+    "rating": 4.9,
+    "reviewsCount": 24,
+    "projectsCompleted": 62,
+    "budgetRange": "₹1,00,000 - ₹8,00,000",
+    "hourlyRate": "₹1,800/hr",
+    "phone": "+91 98888 22222",
+    "email": "priya@interiors.local",
+    "isAvailable": true,
+    "about": "Transforming residential and boutique hospitality spaces into functional, warm and breathtaking environments.",
+    "portfolio": [
+      {
+        "id": "p2-1",
+        "image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=800",
+        "title": "Italian Acrylic Modular Kitchen",
+        "description": "Quartz countertop with soft-close Blum hardware and integrated breakfast island.",
+        "category": "Interior",
+        "cost": "₹4,50,000"
+      },
+      {
+        "id": "p2-2",
+        "image": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800",
+        "title": "Nordic Warm Living Room",
+        "description": "Custom fluted oak wall paneling, ambient LED lighting and bespoke upholstery.",
+        "category": "Interior",
+        "cost": "₹7,00,000"
+      }
+    ],
+    "createdAt": "2026-11-03T13:45:28.750Z"
+  },
+  {
+    "id": "prof-3",
+    "userId": "uuid-pro-ravi",
+    "name": "Ravi Builders & Contractors",
+    "username": "ravibuilders",
+    "profession": "Builder",
+    "category": "Builder",
+    "experience": 10,
+    "location": "Madurai",
+    "specialization": "Turnkey Civil Construction & Structural Engineering",
+    "avatar": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400",
+    "isVerified": true,
+    "verificationStatus": "approved",
+    "verificationDocs": [
+      "PWD Class-1 Contractor License",
+      "ISO 9001:2015 Quality Certification"
+    ],
+    "rating": 4.7,
+    "reviewsCount": 31,
+    "projectsCompleted": 28,
+    "budgetRange": "₹20,00,000 - ₹2,50,00,000",
+    "hourlyRate": "₹3,000/hr",
+    "phone": "+91 97777 33333",
+    "email": "ravi@ravibuilders.local",
+    "isAvailable": true,
+    "about": "Premier general contractor delivering on-time, earthquake-resistant residential and commercial complexes with transparent cost estimates.",
+    "portfolio": [
+      {
+        "id": "p3-1",
+        "image": "https://images.unsplash.com/photo-1541888946425-d0fbb1861564?w=800",
+        "title": "Royal Palm Residential Gated Villa",
+        "description": "3200 sq.ft RCC framed independent duplex with premium Italian marble flooring.",
+        "category": "Construction",
+        "cost": "₹92,00,000"
+      },
+      {
+        "id": "p3-2",
+        "image": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800",
+        "title": "Commercial Multi-Storey Complex",
+        "description": "G+4 floor commercial landmark with basement parking and advanced HVAC.",
+        "category": "Commercial",
+        "cost": "₹2,10,00,000"
+      }
+    ],
+    "createdAt": "2026-11-03T13:45:28.750Z"
+  },
+  {
+    "id": "prof-4",
+    "userId": "uuid-pro-meera",
+    "name": "Meera Designs & Landscape",
+    "username": "meeradesigns",
+    "profession": "Interior Designer",
+    "category": "Interior Designer",
+    "experience": 5,
+    "location": "Trichy",
+    "specialization": "Minimalist Scandinavian & Biophilic Design",
+    "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400",
+    "isVerified": true,
+    "verificationStatus": "approved",
+    "verificationDocs": [
+      "Bachelor of Design Degree",
+      "National Design Registration"
+    ],
+    "rating": 4.6,
+    "reviewsCount": 11,
+    "projectsCompleted": 34,
+    "budgetRange": "₹80,000 - ₹6,00,000",
+    "hourlyRate": "₹1,500/hr",
+    "phone": "+91 96666 44444",
+    "email": "meera@meeradesigns.local",
+    "isAvailable": true,
+    "about": "Passionate about creating clutter-free, serene living spaces with natural woods, indoor greens, and soft earthy palettes.",
+    "portfolio": [
+      {
+        "id": "p4-1",
+        "image": "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800",
+        "title": "Minimalist Zen Master Suite",
+        "description": "Low-profile platform bed, cane accents, and concealed storage.",
+        "category": "Interior",
+        "cost": "₹3,80,000"
+      }
+    ],
+    "createdAt": "2026-11-03T13:45:28.750Z"
+  },
+  {
+    "id": "prof-5",
+    "userId": "uuid-pro-karthik",
+    "name": "Karthik Urban Architecture",
+    "username": "karthikarch",
+    "profession": "Architect",
+    "category": "Architect",
+    "experience": 12,
+    "location": "Bangalore",
+    "specialization": "Smart Homes & High-Rise Apartments",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+    "isVerified": true,
+    "verificationStatus": "approved",
+    "verificationDocs": [
+      "CoA License CA/2012/1234",
+      "LEED AP Accredited"
+    ],
+    "rating": 4.95,
+    "reviewsCount": 42,
+    "projectsCompleted": 80,
+    "budgetRange": "₹75,000 - ₹10,00,000",
+    "hourlyRate": "₹3,500/hr",
+    "phone": "+91 95555 55555",
+    "email": "karthik@urbanarch.local",
+    "isAvailable": false,
+    "about": "Top-tier architect specializing in automated smart homes, green architectural certifications, and high-density luxury residential projects.",
+    "portfolio": [
+      {
+        "id": "p5-1",
+        "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800",
+        "title": "High-Tech Suburban Mansion",
+        "description": "Full KNX home automation, infinity pool and cantilevered master terrace.",
+        "category": "Residential",
+        "cost": "₹1,80,00,000"
+      }
+    ],
+    "createdAt": "2026-11-03T13:45:28.750Z"
+  }
+]

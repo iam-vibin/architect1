@@ -1,0 +1,14 @@
+[
+  {
+    "id": "rep-1",
+    "reporterId": "b481e30e-b6cb-40e6-9b72-7886a11de2a4",
+    "reporterName": "Priya Sharma",
+    "targetId": "prof-4",
+    "targetName": "Meera Designs & Landscape",
+    "targetType": "professional",
+    "reason": "Delayed response to quotation enquiry",
+    "details": "Requested quote 5 days ago, awaiting confirmation.",
+    "status": "pending",
+    "createdAt": "2026-11-01T13:45:28.763Z"
+  }
+]

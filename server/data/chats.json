@@ -1,1 +1,52 @@
-[]
+[
+  {
+    "id": "msg-1",
+    "from": "b481e30e-b6cb-40e6-9b72-7886a11de2a4",
+    "to": "prof-1",
+    "senderName": "Priya Sharma",
+    "senderRole": "user",
+    "message": "Hello Arun, I reviewed your portfolio. We have a 2400 sq.ft plot in OMR and would like to discuss a duplex design.",
+    "timestamp": "2026-11-03T11:45:28.756Z",
+    "isRead": true
+  },
+  {
+    "id": "msg-2",
+    "from": "prof-1",
+    "to": "b481e30e-b6cb-40e6-9b72-7886a11de2a4",
+    "senderName": "Arun Kumar",
+    "senderRole": "professional",
+    "message": "Hi Priya! Thank you for reaching out. I'd love to help. Could you share the plot frontage and orientation (North/East facing)?",
+    "timestamp": "2026-11-03T12:45:28.756Z",
+    "isRead": true
+  },
+  {
+    "id": "msg-3",
+    "from": "b481e30e-b6cb-40e6-9b72-7886a11de2a4",
+    "to": "prof-1",
+    "senderName": "Priya Sharma",
+    "senderRole": "user",
+    "message": "It is East-facing with 40 feet frontage. I have submitted a quotation request with details as well.",
+    "timestamp": "2026-11-03T13:15:28.756Z",
+    "isRead": false
+  },
+  {
+    "id": "2ff52071-95b5-4b26-82f3-bc4dd5270701",
+    "from": "2ebd08da-dd21-4829-899e-a2d978e3aea8",
+    "to": "prof-1",
+    "senderName": "E2E Test Client",
+    "senderRole": "user",
+    "message": "Hello Arun, following up on our project milestones.",
+    "timestamp": "2026-11-03T13:57:29.389Z",
+    "isRead": false
+  },
+  {
+    "id": "7e8f520a-123c-4514-b2ed-beca06aac5a2",
+    "from": "d802853a-57bf-4786-9dc8-2a38fb0cc981",
+    "to": "prof-1",
+    "senderName": "E2E Test Client",
+    "senderRole": "user",
+    "message": "Hello Arun, following up on our project milestones.",
+    "timestamp": "2026-11-03T14:00:31.184Z",
+    "isRead": false
+  }
+]

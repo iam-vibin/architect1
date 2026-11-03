@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-
-// prefer VITE_API_URL for consistency; fall back to localhost
-const API_BASE = (import.meta.env.VITE_API_URL as string) || (import.meta.env.VITE_API_BASE_URL as string) || 'http://localhost:5000';
+import { api } from "@/lib/api";
+import { Building2, ArrowLeft, Shield, User, HardHat, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<string | null>(null);
+  const [selectedRole, setSelectedRole] = useState<string>("user");
 
   useEffect(() => {
     if (user) {
@@ -23,19 +24,16 @@ export default function LoginPage() {
     }
   }, [user, navigate]);
 
-  // enforce that a role is selected before showing login
   useEffect(() => {
     try {
       const sel = localStorage.getItem("archifind_selected_role");
-      if (!sel) {
-        navigate("/select-role");
-      } else {
+      if (sel) {
         setSelectedRole(sel);
       }
     } catch (err) {
-      navigate("/select-role");
+      // fallback to user
     }
-  }, [navigate]);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,112 +41,142 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const url = `${API_BASE}/api/auth/login`;
-      console.log('Attempting login', { url, username });
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-        credentials: 'include',
-      });
+      const body = await api.auth.login({ username, password });
 
-      let body: any = null;
-      try { body = await res.json(); } catch (parseErr) {
-        console.error('Failed to parse JSON response', parseErr);
-      }
-
-      console.log('Login response', { status: res.status, ok: res.ok, body });
-
-      if (!res.ok) {
-        if (res.status === 401) {
-          setError((body && (body.error || body.message)) || 'Invalid username or password');
-        } else {
-          setError((body && (body.error || body.message)) || `Login failed (status ${res.status})`);
-        }
+      if (!body || !body.success) {
+        setError(body?.error || body?.message || "Invalid username or password");
         setLoading(false);
         return;
       }
 
-      if (!body || !body.id) {
-        setError('Login succeeded but server returned unexpected data');
-        setLoading(false);
-        return;
-      }
-
-      // Only log in and navigate after successful response
-      login(body);
+      const loggedUser = body.user || body;
+      login(loggedUser, body.token);
       setLoading(false);
-      if (body?.role === "user") return navigate("/user-dashboard", { replace: true });
-      if (body?.role === "professional") return navigate("/professional-dashboard", { replace: true });
+
+      if (loggedUser.role === "user") return navigate("/user-dashboard", { replace: true });
+      if (loggedUser.role === "professional") return navigate("/professional-dashboard", { replace: true });
       return navigate("/admin-dashboard", { replace: true });
     } catch (err: any) {
-      console.error('Network/login error', err);
-      setError(err?.message || 'Network error');
+      console.error("Login error", err);
+      setError(err?.message || "Unable to connect to ArchiFind backend server");
       setLoading(false);
     }
   };
 
+  const fillQuickCredentials = (u: string, p: string, r: string) => {
+    setUsername(u);
+    setPassword(p);
+    setSelectedRole(r);
+    localStorage.setItem("archifind_selected_role", r);
+    setError(null);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-background">
-      <form onSubmit={handleSubmit} className="w-full max-w-md bg-card p-6 rounded-2xl shadow-card">
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-xl font-semibold">Sign in</h1>
-          {selectedRole && (
-            <div className={`badge-role ${selectedRole === "user" ? "badge-user" : selectedRole === "professional" ? "badge-professional" : "badge-admin"}`}>
-              {selectedRole}
-            </div>
-          )}
-        </div>
-
-        <label className="block mb-3">
-          <span className="text-sm text-muted-foreground">Username</span>
-          <input
-            value={username}
-            onChange={(e) => {
-              setUsername(e.target.value);
-              if (error) setError(null);
-            }}
-            className="mt-1 block w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary/30"
-            required
-          />
-        </label>
-
-        <label className="block mb-3">
-          <span className="text-sm text-muted-foreground">Password</span>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-              if (error) setError(null);
-            }}
-            className="mt-1 block w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-primary/30"
-            required
-          />
-        </label>
-
-        {error && <div className="text-sm text-error mb-3">{error}</div>}
-
-        <div className="flex items-center justify-between">
-          <button disabled={loading} className="px-4 py-2 bg-primary text-white rounded-lg opacity-100 disabled:opacity-60">
-            {loading ? "Signing in..." : "Sign in"}
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              localStorage.removeItem("archifind_selected_role");
-              navigate("/select-role");
-            }}
-            className="text-sm text-muted-foreground"
+    <div className="min-h-screen flex items-center justify-center p-4 bg-slate-50 dark:bg-slate-950">
+      <div className="w-full max-w-md bg-card border border-border p-8 rounded-2xl shadow-elevated">
+        {/* Back and Brand */}
+        <div className="flex items-center justify-between mb-6">
+          <Link
+            to="/select-role"
+            className="text-xs text-muted-foreground hover:text-foreground flex items-center gap-1 transition"
           >
-            Change role
-          </button>
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Switch Role</span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-primary-foreground font-bold">
+              <Building2 className="w-4 h-4" />
+            </div>
+            <span className="font-bold text-sm tracking-tight text-foreground">ArchiFind</span>
+          </div>
         </div>
 
-        <div className="mt-3 text-sm text-muted-foreground">
-          Don't have an account? <button type="button" onClick={() => navigate("/register")} className="text-primary">Register</button>
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-foreground">Sign in to ArchiFind</h1>
+          <p className="text-xs text-muted-foreground mt-1">
+            Sign in as <strong className="capitalize text-primary">{selectedRole}</strong> to access your dashboard
+          </p>
         </div>
-      </form>
+
+        {error && (
+          <div className="text-xs text-destructive bg-destructive/10 border border-destructive/20 p-3 rounded-xl mb-4 animate-shake">
+            {error}
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="text-xs font-semibold text-foreground block mb-1.5">Username</label>
+            <Input
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter username"
+              className="h-11"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="text-xs font-semibold text-foreground block mb-1.5">Password</label>
+            <Input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter password"
+              className="h-11"
+              required
+            />
+          </div>
+
+          <Button type="submit" disabled={loading} className="w-full h-11 bg-primary hover:bg-primary/90 font-medium">
+            {loading ? "Signing in..." : "Sign in"}
+          </Button>
+        </form>
+
+        {/* Quick Demo Logins */}
+        <div className="mt-6 pt-5 border-t border-border">
+          <div className="flex items-center gap-1.5 text-xs text-muted-foreground mb-3 font-medium">
+            <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+            <span>Quick Demo Logins:</span>
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-xs">
+            <button
+              type="button"
+              onClick={() => fillQuickCredentials("user1", "1234", "user")}
+              className="p-2 border rounded-xl hover:bg-muted text-center transition flex flex-col items-center gap-1"
+            >
+              <User className="w-4 h-4 text-sky-600" />
+              <span className="font-semibold text-[11px]">User</span>
+              <span className="text-[10px] text-muted-foreground">user1 / 1234</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => fillQuickCredentials("pro1", "1234", "professional")}
+              className="p-2 border rounded-xl hover:bg-muted text-center transition flex flex-col items-center gap-1"
+            >
+              <HardHat className="w-4 h-4 text-emerald-600" />
+              <span className="font-semibold text-[11px]">Professional</span>
+              <span className="text-[10px] text-muted-foreground">pro1 / 1234</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => fillQuickCredentials("admin", "admin123", "admin")}
+              className="p-2 border rounded-xl hover:bg-muted text-center transition flex flex-col items-center gap-1"
+            >
+              <Shield className="w-4 h-4 text-purple-600" />
+              <span className="font-semibold text-[11px]">Admin</span>
+              <span className="text-[10px] text-muted-foreground">admin / admin123</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-6 text-center text-xs text-muted-foreground">
+          Don't have an account?{" "}
+          <Link to="/register" className="text-primary font-semibold hover:underline">
+            Create an account
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

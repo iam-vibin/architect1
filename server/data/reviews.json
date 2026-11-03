@@ -1,0 +1,52 @@
+[
+  {
+    "id": "rev-1793714431163",
+    "professionalId": "prof-1",
+    "userId": "d802853a-57bf-4786-9dc8-2a38fb0cc981",
+    "userName": "E2E Test Client",
+    "userAvatar": "https://api.dicebear.com/7.x/initials/svg?seed=testclient_mw0r9ce0",
+    "rating": 5,
+    "comment": "Outstanding architectural design and prompt communication throughout the project!",
+    "createdAt": "2026-11-03T14:00:31.163Z"
+  },
+  {
+    "id": "rev-1793714249357",
+    "professionalId": "prof-1",
+    "userId": "2ebd08da-dd21-4829-899e-a2d978e3aea8",
+    "userName": "E2E Test Client",
+    "userAvatar": "https://api.dicebear.com/7.x/initials/svg?seed=testclient_mw0r5g5v",
+    "rating": 5,
+    "comment": "Outstanding architectural design and prompt communication throughout the project!",
+    "createdAt": "2026-11-03T13:57:29.357Z"
+  },
+  {
+    "id": "rev-1",
+    "professionalId": "prof-1",
+    "userId": "b481e30e-b6cb-40e6-9b72-7886a11de2a4",
+    "userName": "Priya Sharma",
+    "userAvatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100",
+    "rating": 5,
+    "comment": "Arun delivered beyond our expectations! His modern house plan had superb cross-ventilation and natural lighting. Highly recommended!",
+    "createdAt": "2026-10-24T13:45:28.755Z"
+  },
+  {
+    "id": "rev-2",
+    "professionalId": "prof-2",
+    "userId": "b481e30e-b6cb-40e6-9b72-7886a11de2a4",
+    "userName": "Karthik R.",
+    "userAvatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100",
+    "rating": 5,
+    "comment": "Excellent finish on the kitchen cabinets and top quality hardware. Finished the interior project within 25 days.",
+    "createdAt": "2026-10-19T13:45:28.755Z"
+  },
+  {
+    "id": "rev-3",
+    "professionalId": "prof-3",
+    "userId": "b481e30e-b6cb-40e6-9b72-7886a11de2a4",
+    "userName": "Senthil Nathan",
+    "userAvatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100",
+    "rating": 5,
+    "comment": "Ravi Builders is very professional and honest with material costs. Civil construction was completed on schedule.",
+    "createdAt": "2026-10-14T13:45:28.755Z"
+  }
+]

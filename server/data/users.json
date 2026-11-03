@@ -22,5 +22,39 @@
     "username": "vishnu ",
     "password": "$2a$10$H3/8YBHxh1jGPybKBTnil.hvDXAQPHzC1ztOXPebkJpou2Ai45MYu",
     "role": "user"
+  },
+  {
+    "id": "2ebd08da-dd21-4829-899e-a2d978e3aea8",
+    "username": "testclient_mw0r5g5v",
+    "fullName": "E2E Test Client",
+    "password": "$2a$10$0wObB.BxklKpygNSeGmsGOKOQMyhFEFDouDv4KFoXYKDFEEOedYga",
+    "role": "user",
+    "email": "testclient_mw0r5g5v@archifind.local",
+    "phone": "",
+    "location": "",
+    "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=testclient_mw0r5g5v",
+    "bio": "",
+    "savedProfessionals": [
+      "prof-1"
+    ],
+    "status": "active",
+    "createdAt": "2026-11-03T13:57:28.915Z"
+  },
+  {
+    "id": "d802853a-57bf-4786-9dc8-2a38fb0cc981",
+    "username": "testclient_mw0r9ce0",
+    "fullName": "E2E Test Client",
+    "password": "$2a$10$UHpCyCWqetFmkipDotqV6OHB6DQ9/h0ngS3FZGyoI/DSQLTJP9K5u",
+    "role": "user",
+    "email": "testclient_mw0r9ce0@archifind.local",
+    "phone": "",
+    "location": "",
+    "avatar": "https://api.dicebear.com/7.x/initials/svg?seed=testclient_mw0r9ce0",
+    "bio": "",
+    "savedProfessionals": [
+      "prof-1"
+    ],
+    "status": "active",
+    "createdAt": "2026-11-03T14:00:30.647Z"
   }
 ]
