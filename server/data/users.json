@@ -1,0 +1,26 @@
+[
+  {
+    "id": "b481e30e-b6cb-40e6-9b72-7886a11de2a4",
+    "username": "user1",
+    "password": "1234",
+    "role": "user"
+  },
+  {
+    "id": "fa4c1c9c-6527-444c-bea7-db35ffc8b710",
+    "username": "pro1",
+    "password": "1234",
+    "role": "professional"
+  },
+  {
+    "id": "88eba6ad-43d6-4050-a00b-21d2044eaedc",
+    "username": "admin",
+    "password": "admin123",
+    "role": "admin"
+  },
+  {
+    "id": "3e00c4ec-8be3-431c-a13c-164d7b6a0cce",
+    "username": "vishnu ",
+    "password": "$2a$10$H3/8YBHxh1jGPybKBTnil.hvDXAQPHzC1ztOXPebkJpou2Ai45MYu",
+    "role": "user"
+  }
+]
