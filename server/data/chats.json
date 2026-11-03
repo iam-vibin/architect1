@@ -48,5 +48,15 @@
     "message": "Hello Arun, following up on our project milestones.",
     "timestamp": "2026-11-03T14:00:31.184Z",
     "isRead": false
+  },
+  {
+    "id": "63b65ec0-011b-461f-ac01-889627159903",
+    "from": "b481e30e-b6cb-40e6-9b72-7886a11de2a4",
+    "to": "prof-1",
+    "senderName": "User",
+    "senderRole": "user",
+    "message": "vrdryfjhbm,",
+    "timestamp": "2026-11-03T14:13:57.664Z",
+    "isRead": false
   }
 ]

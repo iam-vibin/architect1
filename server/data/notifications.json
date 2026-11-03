@@ -148,5 +148,25 @@
     "link": "/professional-dashboard",
     "isRead": false,
     "createdAt": "2026-11-03T14:00:31.236Z"
+  },
+  {
+    "id": "notif-1793715229165",
+    "userId": "fa4c1c9c-6527-444c-bea7-db35ffc8b710",
+    "title": "New Quotation Request",
+    "message": "Client requested a quotation for Residential Villa Design",
+    "type": "quote",
+    "link": "/professional-dashboard",
+    "isRead": false,
+    "createdAt": "2026-11-03T14:13:49.165Z"
+  },
+  {
+    "id": "notif-1793715237668",
+    "userId": "prof-1",
+    "title": "New Message",
+    "message": "User: vrdryfjhbm,...",
+    "type": "message",
+    "link": "/chat/b481e30e-b6cb-40e6-9b72-7886a11de2a4",
+    "isRead": false,
+    "createdAt": "2026-11-03T14:13:57.668Z"
   }
 ]
