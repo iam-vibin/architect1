@@ -4,25 +4,31 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 export type Role = "user" | "professional" | "admin";
 
-export type UserSession = {
-  id: string; // UUID
+export interface UserAccount {
+  id: string;
   username: string;
   name?: string;
+  email?: string;
   role: Role;
-};
+  // Professional-specific fields
+  profession?: string;
+  avatar?: string;
+  portfolio?: string[];
+  rating?: number;
+  isVerified?: boolean;
+  isActive?: boolean;
+  createdAt?: string;
+}
+
+export type UserSession = UserAccount;
 
 type AuthContextType = {
   user: UserSession | null;
   login: (userData: UserSession) => void;
   logout: () => void;
   role: Role | null;
+  updateSession: (partial: Partial<UserSession>) => void;
 };
-
-/* ---------- Fake UUIDs (PoC-safe) ---------- */
-
-const USER_ID = "11111111-1111-1111-1111-111111111111";
-const PROFESSIONAL_ID = "22222222-2222-2222-2222-222222222222";
-const ADMIN_ID = "33333333-3333-3333-3333-333333333333";
 
 /* ---------- Context ---------- */
 
@@ -36,7 +42,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // load from localStorage on mount
   useEffect(() => {
     try {
-      const raw = localStorage.getItem('archifind_user');
+      const raw = localStorage.getItem("archifind_user");
       if (raw) {
         const parsed = JSON.parse(raw) as UserSession;
         setUser(parsed);
@@ -49,17 +55,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = (userData: UserSession) => {
     setUser(userData);
     try {
-      localStorage.setItem('archifind_user', JSON.stringify(userData));
+      localStorage.setItem("archifind_user", JSON.stringify(userData));
     } catch (err) {
       // ignore
     }
   };
 
+  const updateSession = (partial: Partial<UserSession>) => {
+    setUser(prev => {
+      if (!prev) return prev;
+      const updated = { ...prev, ...partial };
+      localStorage.setItem("archifind_user", JSON.stringify(updated));
+      return updated;
+    });
+  };
+
   const logout = () => {
     setUser(null);
     try {
-      localStorage.removeItem('archifind_user');
-      localStorage.removeItem('archifind_selected_role');
+      localStorage.removeItem("archifind_user");
+      localStorage.removeItem("archifind_selected_role");
     } catch (err) {}
   };
 
@@ -70,6 +85,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         role: user ? user.role : null,
         login,
         logout,
+        updateSession,
       }}
     >
       {children}

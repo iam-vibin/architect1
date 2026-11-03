@@ -1,78 +1,191 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { useAuth } from "@/contexts/AuthContext";
+import { ArrowLeft, Send, Paperclip } from "lucide-react";
 
-const API_BASE = (import.meta.env.VITE_API_URL as string) || (import.meta.env.VITE_API_BASE_URL as string) || 'http://localhost:5000';
+const API_BASE = (import.meta.env.VITE_API_URL as string) || "http://localhost:5000";
 
-export default function ChatPage() {
-  const { id } = useParams(); // professionalId
-  const navigate = useNavigate();
+interface Message {
+  id: string;
+  from: string;
+  to: string;
+  message: string;
+  timestamp: string;
+  read: boolean;
+}
+
+interface ChatProps {
+  isSelf?: boolean; // true if this is user's chat page (chatting with a professional)
+}
+
+function ChatView({ partnerId, partnerLabel }: { partnerId: string; partnerLabel: string }) {
   const { user } = useAuth();
-
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [partnerName, setPartnerName] = useState(partnerLabel);
+  const bottomRef = useRef<HTMLDivElement>(null);
   const pollRef = useRef<number | null>(null);
 
   const fetchMessages = async () => {
-    if (!user || !id) return;
+    if (!user || !partnerId) return;
     try {
-      const res = await fetch(`${API_BASE}/api/chat/${user.id}/${id}`);
-      if (!res.ok) return;
-      const data = await res.json();
-      setMessages(data);
-    } catch (err) {
-      // ignore
-    }
+      const res = await fetch(`${API_BASE}/api/chat/${user.id}/${partnerId}`);
+      if (res.ok) {
+        const data = await res.json();
+        setMessages(data);
+        // Mark messages as read
+        fetch(`${API_BASE}/api/chat/read`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ from: partnerId, to: user.id }),
+        }).catch(() => {});
+      }
+    } catch {}
   };
 
   useEffect(() => {
+    // Try to get partner name
+    fetch(`${API_BASE}/api/professionals/${partnerId}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(p => { if (p?.name) setPartnerName(p.name); })
+      .catch(() => {});
+
     fetchMessages();
     pollRef.current = window.setInterval(fetchMessages, 2000);
-    return () => {
-      if (pollRef.current) window.clearInterval(pollRef.current);
-    };
+    return () => { if (pollRef.current) window.clearInterval(pollRef.current); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, id]);
+  }, [user, partnerId]);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const sendMessage = async () => {
-    if (!input.trim() || !user || !id) return;
-    setLoading(true);
+    if (!input.trim() || !user || !partnerId) return;
+    setSending(true);
     try {
       const res = await fetch(`${API_BASE}/api/chat/send`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ from: user.id, to: id, message: input }),
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ from: user.id, to: partnerId, message: input }),
       });
-
       if (res.ok) {
-        setInput('');
-        fetchMessages();
+        setInput("");
+        await fetchMessages();
       }
-    } catch (err) {
-      // ignore
+    } catch {}
+    setSending(false);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
     }
-    setLoading(false);
   };
 
   return (
-    <div className="p-4 max-w-2xl mx-auto">
-      <button onClick={() => navigate(-1)} className="text-sm mb-2">⬅ Back</button>
-
-      <h2 className="text-lg font-semibold mb-3">Chat with Professional {id}</h2>
-
-      <div className="border rounded h-80 p-3 overflow-y-auto bg-gray-50 mb-3">
-        {messages.map((m) => (
-          <div key={m.id} className={`mb-2 p-2 rounded ${m.from === user?.id ? 'bg-sky-600 text-white ml-auto max-w-[80%]' : 'bg-white'}`}>
-            <div className="text-sm">{m.message}</div>
-            <div className="text-xs text-muted-foreground mt-1">{new Date(m.timestamp).toLocaleTimeString()}</div>
+    <div className="flex flex-col h-full">
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-3">
+        {messages.length === 0 && (
+          <div className="flex items-center justify-center h-full text-center">
+            <div>
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                <Send className="w-7 h-7 text-blue-400" />
+              </div>
+              <p className="text-gray-500 font-medium">No messages yet</p>
+              <p className="text-gray-400 text-sm mt-1">Start the conversation!</p>
+            </div>
           </div>
-        ))}
+        )}
+        {messages.map((m, idx) => {
+          const isMine = m.from === user?.id;
+          const showDate = idx === 0 || new Date(m.timestamp).toDateString() !== new Date(messages[idx - 1].timestamp).toDateString();
+          return (
+            <div key={m.id}>
+              {showDate && (
+                <div className="flex items-center justify-center my-2">
+                  <span className="text-xs text-gray-400 bg-gray-100 px-3 py-1 rounded-full">
+                    {new Date(m.timestamp).toLocaleDateString()}
+                  </span>
+                </div>
+              )}
+              <div className={`flex ${isMine ? "justify-end" : "justify-start"}`}>
+                <div className={`max-w-[75%] px-4 py-2.5 rounded-2xl text-sm ${isMine ? "bg-blue-600 text-white rounded-br-md" : "bg-white border border-gray-100 text-gray-800 rounded-bl-md shadow-sm"}`}>
+                  <p className="leading-relaxed">{m.message}</p>
+                  <p className={`text-xs mt-1 ${isMine ? "text-white/60" : "text-gray-400"}`}>
+                    {new Date(m.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                    {isMine && <span className="ml-1">{m.read ? "✓✓" : "✓"}</span>}
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+        <div ref={bottomRef} />
       </div>
 
-      <div className="flex gap-2">
-        <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Type a message..." className="flex-1 px-3 py-2 border rounded" />
-        <button onClick={sendMessage} disabled={loading} className="px-4 py-2 bg-sky-600 text-white rounded">Send</button>
+      {/* Input */}
+      <div className="p-4 bg-white border-t border-gray-100">
+        <div className="flex items-center gap-2 bg-gray-50 rounded-2xl px-4 py-2 border border-gray-200 focus-within:border-blue-400 focus-within:ring-2 focus-within:ring-blue-100 transition-all">
+          <textarea
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Type a message... (Enter to send)"
+            rows={1}
+            className="flex-1 bg-transparent text-sm text-gray-800 resize-none focus:outline-none placeholder-gray-400"
+            style={{ maxHeight: 120 }}
+          />
+          <button
+            onClick={sendMessage}
+            disabled={sending || !input.trim()}
+            className="w-9 h-9 flex items-center justify-center rounded-xl bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all shrink-0"
+          >
+            <Send className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// User → Professional chat
+export default function ChatPage() {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const [partnerName, setPartnerName] = useState(`Professional`);
+
+  useEffect(() => {
+    if (!id) return;
+    fetch(`${API_BASE}/api/professionals/${id}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(p => { if (p?.name) setPartnerName(p.name); })
+      .catch(() => {});
+  }, [id]);
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-30 shadow-sm">
+        <div className="max-w-2xl mx-auto px-4 py-3 flex items-center gap-3">
+          <button onClick={() => navigate(-1)} className="w-9 h-9 flex items-center justify-center rounded-xl bg-gray-100 text-gray-600 hover:bg-gray-200">
+            <ArrowLeft className="w-4 h-4" />
+          </button>
+          <div className="flex items-center gap-2 flex-1">
+            <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-sm">
+              {partnerName?.[0]?.toUpperCase()}
+            </div>
+            <div>
+              <p className="font-semibold text-gray-900 text-sm">{partnerName}</p>
+              <p className="text-xs text-emerald-500">Online</p>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div className="flex-1 max-w-2xl w-full mx-auto flex flex-col" style={{ height: "calc(100vh - 65px)" }}>
+        {id && <ChatView partnerId={id} partnerLabel={`Professional ${id}`} />}
       </div>
     </div>
   );
